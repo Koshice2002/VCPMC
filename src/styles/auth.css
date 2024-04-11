@@ -1,12 +1,13 @@
-.select-language {
+.select-language,
+.select-language:hover {
   display: flex;
   height: 40px;
-  color: white;
   align-items: center;
   margin: 20px 50px 0 0;
   justify-content: center;
-  border: 1px solid white;
-  background-color: #1e1e2e;
+  color: white !important;
+  border: 1px solid #727288 !important;
+  background-color: #1e1e2e !important;
 }
 
 .content {
@@ -29,18 +30,15 @@
   color: white;
   height: 45px;
   margin-top: 10px;
-  background-color: #1e1e2e;
 }
 
-.error {
+.ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  border-color: red !important;
+  background-color: #1e1e2e !important;
+}
+
+.form .error {
   border: 1px solid red;
-}
-
-.ant-input,
-.ant-input-password {
-  color: white;
-  background-color: #1e1e2e;
-  border: 1px solid #727288;
 }
 
 .form:focus,
@@ -48,8 +46,8 @@
 .form:active,
 .ant-input,
 .ant-input-password {
-  color: white;
-  background-color: #1e1e2e !important;
+  color: white !important;
+  border: 1px solid #727288;
 }
 
 .ant-input-password-icon > svg {
@@ -57,8 +55,8 @@
 }
 
 .ant-checkbox-wrapper .ant-checkbox-inner {
-  background-color: #1e1e2e !important;
   border-color: #347aff !important;
+  background-color: #1e1e2e !important;
 }
 
 .btnLogin {

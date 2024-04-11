@@ -13,13 +13,13 @@ const LoginForm: React.FC = () => {
     const onFinish = async ({ username, password }: { username: string, password: string }) => {
         try {
             if (!username || !password) {
-            setError('Hãy nhập tài khoản và mật khẩu.');
-            return;
+                setError('Hãy nhập tài khoản và mật khẩu.');
+                return;
             }
 
             if (username !== 'alta@gmail.com' || password !== '123123') {
-            setError('Sai tên đăng nhập hoặc mật khẩu.');
-            return;
+                setError('Sai tên đăng nhập hoặc mật khẩu.');
+                return;
             }
 
         } catch (error) {
@@ -52,9 +52,9 @@ const LoginForm: React.FC = () => {
                         validateStatus={error ? 'error' : ''}
                     >
                         <Input
-                        className={error ? 'form error' : 'form'}
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                            className={error ? 'form error' : 'form'}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </Form.Item>
                 
@@ -64,7 +64,7 @@ const LoginForm: React.FC = () => {
                         validateStatus={error ? 'error' : ''}
                     >
                         <Input.Password
-                            className='form'
+                            className={error ? 'form error' : 'form'}
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -77,7 +77,6 @@ const LoginForm: React.FC = () => {
                             <span>{error}</span>
                         </div>
                     )}
-
 
                     <Form.Item style={{ marginTop: '-20px'}}>
                         <Form.Item name="remember"noStyle>

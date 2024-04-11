@@ -1,7 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import authSlice from './slice/authSlice'
+import songSlice from './slice/songSlice'
+import exploitContractSlice from './slice/exploitContractSlice'
+import authorizedContractSlice from './slice/authorizedContractSlice'
+
 export const store = configureStore({
   reducer: {
+    auth: authSlice,
+    songs: songSlice,
+    exploitContracts: exploitContractSlice,
+    authorizedContracts: authorizedContractSlice,
   },
 })
 
