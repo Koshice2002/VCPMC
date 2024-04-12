@@ -1,10 +1,9 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-
 import '../styles/styles.css';
 import { Flex, Button } from 'antd';
-import Menu from '../components/Menu';
-import { DownOutlined, RightOutlined } from '@ant-design/icons';
+import Menu from '../components/main-menu/Menu';
 import { Link, useLocation } from 'react-router-dom';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { DownOutlined, RightOutlined } from '@ant-design/icons';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -22,16 +21,17 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     useEffect(() => {
         const path = location.pathname;
 
-        if (
-            path === '/add-exploit-contract' || 
-            path === '/add-authorized-contract' || 
-            path.startsWith('/edit-exploit-contract/') || 
-            path.startsWith('/copy-exploit-contract/') || 
-            path.startsWith('/info-exploit-contract/') ||
-            path.startsWith('/edit-authorized-contract/') || 
-            path.startsWith('/info-authorized-contract/') 
+        if (    path === '/add-exploit-contract' 
+            ||  path === '/record-store/' 
+            ||  path.startsWith('/edit-record/') 
+            ||  path === '/add-authorized-contract' 
+            ||  path.startsWith('/edit-exploit-contract/') 
+            ||  path.startsWith('/copy-exploit-contract/') 
+            ||  path.startsWith('/info-exploit-contract/') 
+            ||  path.startsWith('/edit-authorized-contract/') 
+            ||  path.startsWith('/info-authorized-contract/') 
         ) {
-            setPage('Contract');
+            setPage('Visible');
         }
     }, [location]);
 
@@ -67,11 +67,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </Link>
             </div>
 
-            <div style={{ display: page === 'Contract' ? ' none' : 'block' }}>
+            <div style={{ display: page === 'Visible' ? ' none' : 'block' }}>
                 <Menu />
             </div>
 
-            <div style={{ display: page === 'Contract' ? 'block' : 'none' }}>
+            <div style={{ display: page === 'Visible' ? 'block' : 'none' }}>
                 <div className='menu' style={{ width: '40px', justifyContent: 'center', cursor: 'pointer' }} onClick={handleShowMenu} >
                     <RightOutlined style={{ color: '#FF7506' }} />
                 </div>

@@ -1,6 +1,5 @@
-import '../styles/auth.css';
 import { Button } from 'antd';
-
+import '../styles/auth.css';
 import React, { ReactNode } from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';

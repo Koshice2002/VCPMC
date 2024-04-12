@@ -16,28 +16,32 @@ export interface IAuthorizedContract {
   id?: string
   name?: string
   number?: string
-  ownership?: string
   person?: string
   validity?: number
   create_at?: string
+  ownership?: string
 }
 
 export interface IExploitContract {
   id?: string
-  number?: string
   name?: string
+  number?: string
+  validity?: number
   create_at?: string
   effect_at?: string
   expire_at?: string
-  validity?: number
 }
 
 export interface IAuthorizedSong {
   id?: string
   name?: string
   code?: string
+  type?: string
+  image?: string
+  format?: string
   singer?: string
   artist?: string
   status?: number
-  downloadDate?: string
+  duration?: string
+  downloadDate?: Timestamp
 }
