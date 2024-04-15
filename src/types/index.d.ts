@@ -45,3 +45,12 @@ export interface IAuthorizedSong {
   duration?: string
   downloadDate?: Timestamp
 }
+
+export interface IPlaylist {
+  id?: string
+  name?: string
+  songs?: string[]
+  duration?: string
+  person_create?: string
+  create_at?: Timestamp
+}

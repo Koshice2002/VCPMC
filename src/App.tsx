@@ -3,21 +3,25 @@ import Login from './pages/auth/Login';
 import Error from './pages/auth/Error';
 import React, { useEffect } from 'react';
 import BasicInfo from './pages/auth/BasicInfo';
+import Playlist from './pages/playlist/Playlist';
+import EditRecord from './pages/record/EditRecord';
 import RecordStore from './pages/record/RecordStore';
+import PlaylistAdd from './pages/playlist/PlaylistAdd';
 import ResetPassword from './pages/auth/ResetPassword';
+import PlaylistEdit from './pages/playlist/PlaylistEdit';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ContractManage from './pages/manage/ContractManage';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
+import PlaylistDetail from './pages/playlist/PlaylistDetail';
+import PlaylistAddSong from './pages/playlist/PlaylistAddSong';
 import AddExploitContract from './pages/manage/AddExploitContract';
 import EditExploitContract from './pages/manage/EditExploitContract';
 import CopyExploitContract from './pages/manage/CopyExploitContract';
 import InfoExploitContract from './pages/manage/InfoExploitContract';
+import NewPlaylistAddSong from './pages/playlist/NewPlaylistAddSong';
 import AddAuthorizedContract from './pages/manage/AddAuthorizedContract';
 import InfoAuthorizedContract from './pages/manage/InfoAuthorizedContract';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditAuthorizedContract from './pages/manage/EditAuthorizedContract';
-import { authorizedContractFetchData } from './redux/slice/authorizedContractSlice';
-import EditRecord from './pages/record/EditRecord';
 
 const App = () => {
 
@@ -46,6 +50,14 @@ const App = () => {
         {/* Record Store */}
         <Route path='/record-store' element={<RecordStore/>} />
         <Route path='/edit-record/:id' element={<EditRecord/>} />
+
+        {/* Playlist */}
+        <Route path='/playlist' element={<Playlist/>} />
+        <Route path='/add-playlist' element={<PlaylistAdd/>} />
+        <Route path='/edit-playlist/:id' element={<PlaylistEdit/>} />
+        <Route path='/detail-playlist/:id' element={<PlaylistDetail/>} />
+        <Route path='/playlist-add-song/:id' element={<PlaylistAddSong/>} />
+        <Route path='/new-playlist-add-song' element={<NewPlaylistAddSong/>} />
 
       </Routes>
     </Router>

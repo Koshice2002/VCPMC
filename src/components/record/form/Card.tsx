@@ -1,10 +1,9 @@
 import React from 'react';
+import { Checkbox } from 'antd';
 import '../../../styles/styles.css'
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { PlayCircleOutlined, EditOutlined } from '@ant-design/icons';
-import { Checkbox } from 'antd';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 interface Song {
     id?: string;

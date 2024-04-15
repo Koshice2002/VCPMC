@@ -1,29 +1,30 @@
-import Card from './Card';
+import Card from './Card'
 import { Pagination } from 'antd';
 import '../../../styles/styles.css'
 import { useMediaQuery } from 'react-responsive';
-import { IAuthorizedSong } from '../../../types';
 import React, { useEffect, useState } from 'react';
-import { getIAuthorizedSongs } from '../../../redux/actions/songAction';
+import { IPlaylist } from '../../../types';
+import { getIPlaylist } from '../../../redux/actions/playlistAction';
 
-interface Props {
-    showCheckBox: boolean;
-}
-
-const FormRecordStoreCard: React.FC<Props> = ({ showCheckBox }) => {
+const FormPlaylistCard: React.FC = () => {
     const itemsPerPage = 8;
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [data, setData] = useState<IAuthorizedSong[]>([]);
+    const [data, setData] = useState<IPlaylist[]>([]);
 
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-device-width: 1224px)'
     });
 
+    const totalSongsPerPlaylist = data.map(playlist => {
+        const total = playlist.songs ? playlist.songs.length : 0;
+        return total;
+    });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-            const contracts = await getIAuthorizedSongs();
+            const contracts = await getIPlaylist();
             setData(contracts);
             } catch (error) {
             console.error('Error fetching data:', error);
@@ -49,8 +50,8 @@ const FormRecordStoreCard: React.FC<Props> = ({ showCheckBox }) => {
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
     // Logic để tạo các card từ dữ liệu hiện tại
-    const renderedCards = currentItems.map((song, index) => (
-        <Card key={index} song={song} showCheckBox={showCheckBox} />
+    const renderedCards = currentItems.map((playlist, index) => (
+        <Card key={index} playlist={playlist} totalSongsCount={totalSongsPerPlaylist[index]} />
     ));
 
     return (
@@ -98,4 +99,4 @@ const FormRecordStoreCard: React.FC<Props> = ({ showCheckBox }) => {
     )
 }
 
-export default FormRecordStoreCard
+export default FormPlaylistCard

@@ -5,8 +5,6 @@ import MenuActionRecord from '../../components/record/menu/MenuActionRecord';
 import FormRecordStoreCard from '../../components/record/form/FormRecordStoreCard';
 import FormRecordStoreTable from '../../components/record/form/FormRecordStoreTable';
 import { SearchOutlined, DownOutlined, UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { IAuthorizedSong } from '../../types';
 
 const { Option } = Select;
 

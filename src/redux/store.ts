@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import authSlice from './slice/authSlice'
 import songSlice from './slice/songSlice'
+import playlistSlice from './slice/playlistSlice'
 import exploitContractSlice from './slice/exploitContractSlice'
 import authorizedContractSlice from './slice/authorizedContractSlice'
 
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     auth: authSlice,
     songs: songSlice,
+    playlists: playlistSlice,
     exploitContracts: exploitContractSlice,
     authorizedContracts: authorizedContractSlice,
   },

@@ -25,27 +25,27 @@ const ContractManage = () => {
         </h3>
         <h1>Danh sách hợp đồng</h1>
 
-        <div className='switch-tabs'>
-              <span>
-                 <Button
-                    className={`${activeTab === 'authorized' ? 'switch-btn ' : 'switch-btn-inactive'}`}
-                    onClick={switchToAuthorizedTab}
-                >
-                    Hợp đồng ủy quyền
-                </Button>
-              </span>
-              <span>
+        <div className='switch-tabs' style={{margin: '-10px 0'}}>
+            <span>
                 <Button
-                    className={`${activeTab === 'exploit' ? ' switch-btn' : 'switch-btn-inactive'}`}
-                    onClick={switchToExploitTab}
-                >
-                    Hợp đồng khai thác
-                </Button>
-              </span>
-            </div>
+                className={`${activeTab === 'authorized' ? 'switch-btn ' : 'switch-btn-inactive'}`}
+                onClick={switchToAuthorizedTab}
+            >
+                Hợp đồng ủy quyền
+            </Button>
+            </span>
+            <span>
+            <Button
+                className={`${activeTab === 'exploit' ? ' switch-btn' : 'switch-btn-inactive'}`}
+                onClick={switchToExploitTab}
+            >
+                Hợp đồng khai thác
+            </Button>
+            </span>
+        </div>
 
-            {activeTab === 'exploit' && <FormContractExploit />}
-            {activeTab === 'authorized' && <FormContractAuthorized />}
+        {activeTab === 'exploit' && <FormContractExploit />}
+        {activeTab === 'authorized' && <FormContractAuthorized />}
 
         <AddContractBtn activeTab={activeTab}></AddContractBtn>
     </MainLayout>

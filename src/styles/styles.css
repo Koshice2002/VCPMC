@@ -154,6 +154,8 @@
   width: 78px;
   display: flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .basic {
@@ -443,6 +445,10 @@
   background-color: #2f2f41;
 }
 
+.custom-table {
+  height: 600px;
+}
+
 .custom-table .ant-table-tbody,
 .custom-table .ant-table-tbody > tr > td,
 .custom-table .ant-table-thead > tr > th {
@@ -693,4 +699,83 @@
 .checkbox-custom .ant-checkbox-inner {
   width: 24px;
   height: 24px;
+}
+
+.form-detail-playlist {
+  height: 750px;
+  width: 1690px;
+}
+
+.form-detail-left {
+  width: 274px;
+  height: 100%;
+  margin-right: 24px;
+}
+
+.form-detail-right {
+  height: 100%;
+  width: 1392px;
+}
+
+.img-detail {
+  width: 274px;
+  height: 274px;
+  border-radius: 8px;
+}
+
+.form-info-detail {
+  width: 100%;
+  border-top: 1px solid gray;
+}
+
+.cover-icon {
+  display: flex;
+  top: 12%;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  align-items: center;
+  border-radius: 100%;
+  justify-content: center;
+  border: 1px solid orange;
+  background-color: orange;
+  transform: translate(-50%, -50%);
+}
+
+.more-icon {
+  z-index: 10;
+  cursor: pointer;
+  position: absolute;
+}
+
+.more-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.centered-cell,
+.ant-table-wrapper .ant-table-summary > tr > td {
+  color: white;
+  text-align: center;
+  border-bottom: 1px solid gray;
+  background-color: #2f2f41;
+}
+
+.form-add-song-playlist {
+  width: 1760px;
+  height: 868px;
+}
+
+.form-add-song-left {
+  width: 868px;
+  height: 750xp;
+  background-color: #2f2f41;
+  margin-right: 24px;
+}
+
+.form-add-song-right {
+  width: 868px;
+  height: 750xp;
+  background-color: #2f2f41;
 }

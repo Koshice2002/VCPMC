@@ -21,17 +21,22 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     useEffect(() => {
         const path = location.pathname;
 
-        if (    path === '/add-exploit-contract' 
-            ||  path === '/record-store/' 
+        if (   path === '/add-playlist'
+            ||  path === '/add-exploit-contract'  
             ||  path.startsWith('/edit-record/') 
-            ||  path === '/add-authorized-contract' 
+            ||  path === '/new-playlist-add-song'
+            ||  path.startsWith('/edit-playlist/')
+            ||  path === '/add-authorized-contract'
+            ||  path.startsWith('/detail-playlist/')
+            ||  path.startsWith('/playlist-add-song/')
             ||  path.startsWith('/edit-exploit-contract/') 
             ||  path.startsWith('/copy-exploit-contract/') 
             ||  path.startsWith('/info-exploit-contract/') 
             ||  path.startsWith('/edit-authorized-contract/') 
             ||  path.startsWith('/info-authorized-contract/') 
+
         ) {
-            setPage('Visible');
+            setPage('Hidden');
         }
     }, [location]);
 
@@ -67,11 +72,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </Link>
             </div>
 
-            <div style={{ display: page === 'Visible' ? ' none' : 'block' }}>
+            <div style={{ display: page === 'Hidden' ? ' none' : 'block' }}>
                 <Menu />
             </div>
 
-            <div style={{ display: page === 'Visible' ? 'block' : 'none' }}>
+            <div style={{ display: page === 'Hidden' ? 'block' : 'none' }}>
                 <div className='menu' style={{ width: '40px', justifyContent: 'center', cursor: 'pointer' }} onClick={handleShowMenu} >
                     <RightOutlined style={{ color: '#FF7506' }} />
                 </div>

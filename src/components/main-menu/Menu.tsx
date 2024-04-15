@@ -31,6 +31,15 @@ const Menu: React.FC = () => {
             ||  path.startsWith('/edit-record/')
 
         ) { setPage ('Record')}
+        else 
+        if (    path === '/playlist' 
+            ||  path === '/add-playlist'
+            ||  path === '/new-playlist-add-song'
+            ||  path.startsWith('/edit-playlist/')
+            ||  path.startsWith('/detail-playlist/')
+            ||  path.startsWith('/playlist-add-song/')
+
+        ) { setPage ('Playlist')}
     }, [location]);
 
     const isDesktopOrLaptop = useMediaQuery({
@@ -57,7 +66,7 @@ const Menu: React.FC = () => {
                         <span>Kho bản ghi</span>
                     </Link>
 
-                    <Link to={'/'} className='custom-link item'>
+                    <Link to={'/playlist'} className={page === 'Playlist' ? 'custom-link item item-active' : 'custom-link item'} style={{borderLeft: page === 'Playlist' ? '1px solid #ff7506' : 'none'}}>
                         <i className='icon-item'>
                             <UnorderedListOutlined />
                         </i>
