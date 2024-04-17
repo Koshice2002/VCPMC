@@ -1,11 +1,11 @@
 import '../../../styles/styles.css'
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { IPlaylist } from '../../../types';
+import { Button, Input, Switch } from 'antd';
 import FormTableDetail from './FormTableDetail';
 import { useMediaQuery } from 'react-responsive';
-import { GlobalOutlined, SyncOutlined, SwapOutlined, MoreOutlined } from '@ant-design/icons';
-import { Button, Input, Switch } from 'antd';
-import { Link } from 'react-router-dom';
+import { MoreOutlined } from '@ant-design/icons';
 
 interface Props {
     playlist: IPlaylist | null;

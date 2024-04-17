@@ -252,7 +252,7 @@
   height: 50px;
   color: #ff7506;
   border: 1px solid #ff7506;
-  background-color: #1e1e2e;
+  background-color: transparent;
 }
 
 .btnCancel:hover {
@@ -265,6 +265,7 @@
   height: 512px;
   width: 552px;
   display: flex;
+  box-shadow: none;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -404,6 +405,10 @@
   width: 160px;
   margin-left: 5px;
   height: 40px !important;
+}
+
+.long-dropdown {
+  width: 274px;
 }
 
 .ant-select-selector {
@@ -713,7 +718,7 @@
 }
 
 .form-detail-right {
-  height: 100%;
+  height: 750px;
   width: 1392px;
 }
 
@@ -778,4 +783,91 @@
   width: 868px;
   height: 750xp;
   background-color: #2f2f41;
+}
+
+.form-top-left {
+  width: 274px;
+  height: 330px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  background-color: #2f2f41;
+  border: 1px solid #2f2f41;
+}
+
+.form-bottom-left {
+  width: 274px;
+  height: 390px;
+  border-radius: 8px;
+  background-color: #2f2f41;
+  border: 1px solid #2f2f41;
+}
+
+.card-list {
+  width: 240px;
+  margin: 15px 0;
+  border-radius: 8px;
+  background-color: #33334d;
+  border: 1px solid #33334d;
+}
+
+.schedule-dashboard {
+  display: flex;
+  width: 1353px;
+  height: 710px;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.schedule-row {
+  display: flex;
+  color: orange;
+}
+
+.schedule-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-cell {
+  flex: 1;
+  padding: 10px;
+}
+
+.line {
+  width: 98%;
+  border-bottom: 1px solid gray;
+}
+
+.ant-radio-inner {
+  background-color: transparent !important;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  margin-right: 6px;
+  border-radius: 100%;
+  display: inline-flex;
+  border: 1px solid transparent;
+}
+
+.form-device-detail {
+  display: flex;
+  width: 1682px;
+  height: 480px;
+  background-color: #2b2b3f;
+}
+
+.device-detail-inner {
+  display: flex;
+  margin: 24px 125px;
+}
+
+.device-img {
+  width: 340px;
+  height: 160px;
 }

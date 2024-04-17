@@ -1,20 +1,20 @@
 import { db } from '../../firebase';
-import { getIAuthorizedSongById } from './songAction';
-import { IPlaylist, IAuthorizedSong } from "../../types";
+import { IBroadcast, IPlaylist } from "../../types";
 import { collection, query, getDocs, doc, getDoc } from 'firebase/firestore';
+import { getIPlaylistById } from './playlistAction';
 
-export const getIPlaylist= async (): Promise<IPlaylist[]> => {
+export const getIBroadcast= async (): Promise<IBroadcast[]> => {
   try {
-    const data: IPlaylist[] = [];
+    const data: IBroadcast[] = [];
 
     const q = query(
-      collection(db, "playlist")
+      collection(db, "broadcast")
     );
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      data.push({...doc.data(), id: doc.id} as IPlaylist);
+      data.push({...doc.data(), id: doc.id} as IBroadcast);
     });
 
     return data;
@@ -24,45 +24,47 @@ export const getIPlaylist= async (): Promise<IPlaylist[]> => {
   }
 };
 
-export const getIPlaylistById = async (id: string): Promise<IPlaylist | null> => {
+export const getIBroadcastById = async (id: string): Promise<IBroadcast | null> => {
   try {
-    const docRef = doc(db, 'playlist', id);
+    const docRef = doc(db, 'broadcast', id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      const data = docSnap.data() as IPlaylist;
+      const data = docSnap.data() as IBroadcast;
       return { ...data, id: docSnap.id };
     } else {
       console.log('No such document!');
       return null;
     }
   } catch (error) {
-    console.error('Error getting playlist by ID:', error);
+    console.error('Error getting broadcast by ID:', error);
     return null;
   }
 };
 
-export const fetchSongsForPlaylist = async (playlistId: string): Promise<IAuthorizedSong[]> => {
+export const fetchPlaylistForBroadcast = async (broadcastId: string): Promise<IPlaylist[]> => {
     try {
         // Fetch the playlist by its ID to get the list of song IDs associated with it
-        const playlist = await getIPlaylistById(playlistId);
-        if (!playlist) {
+        const broadcast = await getIBroadcastById(broadcastId);
+        if (!broadcast) {
             throw new Error('Playlist not found');
         }
 
-        const { songs } = playlist;
+        const { playlist } = broadcast;
 
-        if (!songs || songs.length === 0) {
+        if (!playlist || playlist.length === 0) {
             return []; // Return an empty array if the playlist has no songs
         }
 
         // Fetch the song data for each song ID in the playlist
-        const songPromises = songs.map(songId => getIAuthorizedSongById(songId));
-        const songDataArray = await Promise.all(songPromises);
+        const playlistPromises = playlist.map(songId => getIPlaylistById(songId));
+        const playlistDataArray = await Promise.all(playlistPromises);
 
         // Filter out null values (songs not found) and return the song data array
-        return songDataArray.filter((songData): songData is IAuthorizedSong => !!songData);
+        return playlistDataArray.filter((playlistData): playlistData is IBroadcast => !!playlistData);
     } catch (error) {
         console.error('Error fetching songs for playlist:', error);
         throw error;
     }
 };
+
+

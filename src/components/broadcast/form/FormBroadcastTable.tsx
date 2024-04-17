@@ -1,17 +1,25 @@
 import '../../../styles/styles.css'
 import { Link } from 'react-router-dom';
 import { Table, Pagination } from 'antd';
-import { IPlaylist } from '../../../types';
-import { Timestamp } from 'firebase/firestore';
+import { IBroadcast } from '../../../types';
 import { useMediaQuery } from 'react-responsive';
 import React, { useEffect, useState } from 'react';
-import { getIPlaylist } from '../../../redux/actions/playlistAction';
+import { getIBroadcast } from '../../../redux/actions/broadcastAction';
+import DeletePopUp from '../popup/DeletePopUp';
 
-const FormPlaylistTable: React.FC= () => {
+const FormBroadcastTable: React.FC = () => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    
-    const [data, setData] = useState<IPlaylist[]>([]);
+    const [data, setData] = useState<IBroadcast[]>([]);
+    const [deletePopUp, setDeletePopUp] = useState(false);
+
+    const showPopUp = () => {
+        setDeletePopUp(true);
+    };
+
+    const closePopUp = () => {
+        setDeletePopUp(false);
+    };
 
     const formatDate = (date: Date) => {
         const day = date.getDate().toString().padStart(2, '0'); // Lấy ngày và thêm số 0 nếu cần
@@ -20,12 +28,12 @@ const FormPlaylistTable: React.FC= () => {
 
         return `${day}/${month}/${year}`; // Kết hợp lại thành chuỗi "dd/mm/yyyy"
     };
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const playlists = await getIPlaylist();
-                setData(playlists);
+                const contracts = await getIBroadcast();
+                setData(contracts);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -33,11 +41,6 @@ const FormPlaylistTable: React.FC= () => {
 
         fetchData();
     }, []);
-
-    const totalSongsPerPlaylist = data.map(playlist => {
-        const total = playlist.songs ? playlist.songs.length : 0;
-            return total;
-    });
 
     const dataSourceWithRowNumber = data.map((item, index) => ({ ...item, rowNumber: index + 1 }));
 
@@ -48,39 +51,18 @@ const FormPlaylistTable: React.FC= () => {
             key: 'rowNumber',
         },
         {
-            title: 'Tiêu đề',
+            title: 'Tên lịch',
             key: 'name',
             dataIndex: 'name',
         },
         {
-            title: 'Số bản ghi',
-            dataIndex: 'number_record',
-            render: (_: any, record: any, index: number) => totalSongsPerPlaylist[index],
-        },
-        {
-            title: 'Thời lượng',
+            title: 'Thời hạn phát',
             key: 'duration',
-            dataIndex: 'duration',
-        },
-        {
-            title: 'Chủ đề',
-            dataIndex: 'types',
-            render: () => 'Pop, Ballad',
-        },
-        {
-            title: 'Ngày tạo',
-            dataIndex: 'create_at',
-            key: 'create_at',
-            render: (create_at: Timestamp) => (
+            render: (record: IBroadcast) => (
                 <span>
-                    {formatDate(create_at.toDate())}
+                    {record.create_at && record.expire_at ? `${formatDate(record.create_at.toDate())}  - ${formatDate(record.expire_at.toDate())}` : '-'}
                 </span>
             )
-        },
-        {
-            title: 'Người tạo',
-            key: 'person_create',
-            dataIndex: 'person_create',
         },
         {
             title: '',
@@ -88,11 +70,24 @@ const FormPlaylistTable: React.FC= () => {
             key: 'action',
             render: (text: string, record: any) => (
                 <Link
-                    to={`/detail-playlist/${record.id}`}
+                    to={`/broadcast-detail/${record.id}`}
                     style={{ color: 'orange' }}
                 >
-                    Chi tiết
+                    Xem chi tiết
                 </Link>
+            ),
+        },
+        {
+            title: '',
+            dataIndex: 'action',
+            key: 'action',
+            render: (text: string, record: any) => (
+                <div 
+                    onClick={showPopUp}
+                    style={{ color: 'orange', cursor: 'pointer' }}
+                >
+                    Xóa
+                </div>
             ),
         },
     ];
@@ -149,6 +144,7 @@ const FormPlaylistTable: React.FC= () => {
                             />
                         </div>
                     </div>
+                    <DeletePopUp open={deletePopUp} onClose={closePopUp}></DeletePopUp>
                 </div>
             ) : (
                 <></>
@@ -157,4 +153,4 @@ const FormPlaylistTable: React.FC= () => {
     )
 }
 
-export default FormPlaylistTable
+export default FormBroadcastTable

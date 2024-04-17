@@ -21,23 +21,32 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     useEffect(() => {
         const path = location.pathname;
 
-        if (   path === '/add-playlist'
-            ||  path === '/add-exploit-contract'  
+        if (    path === '/device-add'
+            ||  path === '/add-playlist'
+            ||  path === '/broadcast-add' 
+            ||  path === '/add-exploit-contract' 
             ||  path.startsWith('/edit-record/') 
             ||  path === '/new-playlist-add-song'
+            ||  path.startsWith('/partner-add/')
+            ||  path.startsWith('/partner-edit/')
+            ||  path.startsWith('/device-detail/')
             ||  path.startsWith('/edit-playlist/')
             ||  path === '/add-authorized-contract'
+            ||  path.startsWith('/partner-detail/')
             ||  path.startsWith('/detail-playlist/')
+            ||  path === '/broadcast-add-new-device' 
+            ||  path.startsWith('/broadcast-detail/')
+            ||  path.startsWith('/unit-used-detail/')
             ||  path.startsWith('/playlist-add-song/')
+            ||  path.startsWith('/broadcast-edit-device/')
             ||  path.startsWith('/edit-exploit-contract/') 
             ||  path.startsWith('/copy-exploit-contract/') 
             ||  path.startsWith('/info-exploit-contract/') 
+            ||  path.startsWith('/edit-partner-authorized/')
+            ||  path.startsWith('/broadcast-edit-playlist/')
             ||  path.startsWith('/edit-authorized-contract/') 
             ||  path.startsWith('/info-authorized-contract/') 
-
-        ) {
-            setPage('Hidden');
-        }
+        ) { setPage('Hidden') }
     }, [location]);
 
     return (

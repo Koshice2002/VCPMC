@@ -51,6 +51,48 @@ export interface IPlaylist {
   name?: string
   songs?: string[]
   duration?: string
-  person_create?: string
   create_at?: Timestamp
+  person_create?: string
+}
+
+export interface IBroadcast {
+  id?: string
+  name?: string
+  playlist?: string[]
+  create_at?: Timestamp
+  expire_at?: Timestamp
+}
+
+export interface IDevice {
+  id?: string
+  name?: string
+  unit?: string
+  image?: string
+  skuID?: string
+  memory?: string
+  address?: string
+  status?: boolean
+  username?: string
+  macAddress?: string
+  expire_at?: Timestamp
+}
+
+export interface IPartner {
+  id?: string
+  name?: string
+  email?: string
+  role?: string
+  phone?: string
+  status?: string
+  expire_at: Timestamp
+}
+
+export interface IUnitUsed {
+  id?: string
+  name?: string
+  admin?: string
+  role?: string
+  phone?: string
+  status?: string
+  expire_at: Timestamp
 }

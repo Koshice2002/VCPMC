@@ -17,12 +17,22 @@ const Menu: React.FC = () => {
     useEffect(() => {
         const path = location.pathname;
 
-        if (    path === '/contract-manage' 
+        if (    path === '/device-add' 
+            ||  path === '/device-manage' 
+            ||  path === '/contract-manage' 
+            ||  path === '/unit-used-manage' 
             ||  path === '/add-exploit-contract' 
+            ||  path.startsWith('/partner-add/')
+            ||  path.startsWith('/partner-edit/')
+            ||  path.startsWith('/device-detail/')
             ||  path === '/add-authorized-contract' 
+            ||  path.startsWith('/partner-detail/')
+            ||  path === '/partner-authorized-manage' 
+            ||  path.startsWith('/unit-used-detail/') 
             ||  path.startsWith('/info-exploit-contract/') 
             ||  path.startsWith('/edit-exploit-contract/') 
             ||  path.startsWith('/copy-exploit-contract/') 
+            ||  path.startsWith('/edit-partner-authorized/')
             ||  path.startsWith('/edit-authorized-contract/') 
             ||  path.startsWith('/info-authorized-contract/')
         ) { setPage('Manage'); }
@@ -40,6 +50,15 @@ const Menu: React.FC = () => {
             ||  path.startsWith('/playlist-add-song/')
 
         ) { setPage ('Playlist')}
+        else 
+        if (    path === '/broadcast-add'
+            ||  path === '/broadcast-manage'
+            ||  path === '/broadcast-add-new-device' 
+            ||  path.startsWith('/broadcast-detail/')
+            ||  path.startsWith('/broadcast-edit-playlist/')
+            ||  path.startsWith('/broadcast-edit-device/')
+
+        ) { setPage ('Broadcast')}
     }, [location]);
 
     const isDesktopOrLaptop = useMediaQuery({
@@ -73,7 +92,7 @@ const Menu: React.FC = () => {
                         <span>Playlist</span>
                     </Link>
                     
-                    <Link to={'/'} className='custom-link item'>
+                    <Link to={'/broadcast-manage'} className={page === 'Broadcast' ? 'custom-link item item-active' : 'custom-link item'} style={{borderLeft: page === 'Broadcast' ? '1px solid #ff7506' : 'none'}}>
                         <i className='icon-item'>
                             <CalendarOutlined />
                         </i>
@@ -97,9 +116,9 @@ const Menu: React.FC = () => {
                         {showSubItem1 && (
                             <div className='sub-item'>
                                 <Link to={'/contract-manage'} className='popup-item custom-link'>Quản lý hợp đồng</Link>
-                                <div className='popup-item'>Quản lý thiết bị</div>
-                                <div className='popup-item'>Đơn vị ủy quyền</div>
-                                <div className='popup-item'>Đơn vị sử dụng</div>
+                                <Link to={'/device-manage'} className='popup-item custom-link'>Quản lý thiết bị</Link>
+                                <Link to={'/partner-authorized-manage'} className='popup-item custom-link'>Đối tác ủy quyền</Link>
+                                <Link to={'/unit-used-manage'} className='popup-item custom-link'>Đơn vị sử dụng</Link>
                             </div>
                         )}
                     </div>

@@ -1,51 +1,40 @@
-import '../../../styles/styles.css'
+import '../../../../styles/styles.css'
 import { Link } from 'react-router-dom';
 import { Timestamp } from 'firebase/firestore';
 import { useMediaQuery } from 'react-responsive';
-import { IAuthorizedSong } from '../../../types';
 import React, { useEffect, useState } from 'react';
-import { Table, Pagination, Checkbox } from 'antd';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { getIAuthorizedSongs } from '../../../redux/actions/songAction';
+import { IAuthorizedContract } from '../../../../types';
+import { Input, Table, Select, Pagination } from 'antd';
+import { SearchOutlined, DownOutlined } from '@ant-design/icons';
+import { getIAuthorizedSongs } from '../../../../redux/actions/songAction';
+import { create } from 'domain';
 
-interface Props {
-    showCheckBox: boolean;
-}
+const { Option } = Select;
 
-const FormRecordStoreTable: React.FC<Props> = ({ showCheckBox }) => {
+const FormAuthorizedWork: React.FC = () => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [data, setData] = useState<IAuthorizedSong[]>([]);
-    
-    const [selectAllChecked, setSelectAllChecked] = useState(false);
-    const [selectedRecords, setSelectedRecords] = useState<{ [key: string]: boolean }>({});
+    const [data, setData] = useState<IAuthorizedContract[]>([]);
 
-    const handleSelectAllChange = (e: CheckboxChangeEvent) => {
-        const checked = e.target.checked;
-        setSelectAllChecked(checked);
-        const updatedSelectedRecords: { [key: string]: boolean } = {};
-        data.forEach(record => {
-            if (record.id) {
-                updatedSelectedRecords[record.id] = checked;
-            }
-        });
-        setSelectedRecords(updatedSelectedRecords);
-    };
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-device-width: 1224px)'
+    });
 
-    const handleRecordCheckboxChange = (recordId: string, checked: boolean) => {
-        setSelectedRecords(prevState => ({
-            ...prevState,
-            [recordId]: checked,
-        }));
+    const formatDate = (date: Date) => {
+        const day = date.getDate().toString().padStart(2, '0'); // Lấy ngày và thêm số 0 nếu cần
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Lấy tháng và thêm số 0 nếu cần
+        const year = date.getFullYear(); // Lấy năm
+
+        return `${day}/${month}/${year}`; // Kết hợp lại thành chuỗi "dd/mm/yyyy"
     };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const contracts = await getIAuthorizedSongs();
-                setData(contracts);
+            const contracts = await getIAuthorizedSongs();
+            setData(contracts);
             } catch (error) {
-                console.error('Error fetching data:', error);
+            console.error('Error fetching data:', error);
             }
         };
 
@@ -55,26 +44,6 @@ const FormRecordStoreTable: React.FC<Props> = ({ showCheckBox }) => {
     const dataSourceWithRowNumber = data.map((item, index) => ({ ...item, rowNumber: index + 1 }));
 
     const columns = [
-        {
-            title: (
-                <>
-                    {showCheckBox && <Checkbox className='checkbox-custom' checked={selectAllChecked} onChange={handleSelectAllChange}></Checkbox>}
-                </>
-            ),
-            colSpan: 1,
-            key: 'id',
-            render: (record: IAuthorizedSong) => (
-                <>
-                    {showCheckBox && record.id && (
-                        <Checkbox
-                            className='checkbox-custom'
-                            checked={selectedRecords[record.id]}
-                            onChange={(e: CheckboxChangeEvent) => handleRecordCheckboxChange(record.id!, e.target.checked)}
-                        ></Checkbox>
-                    )} 
-                </>
-            ),
-        },
         {
             title: 'STT',
             dataIndex: 'rowNumber',
@@ -91,11 +60,6 @@ const FormRecordStoreTable: React.FC<Props> = ({ showCheckBox }) => {
             dataIndex: 'code',
         },
         {
-            title: 'Thời lượng',
-            key: 'duration',
-            dataIndex: 'duration',
-        },
-        {
             title: 'Ca sĩ',
             key: 'singer',
             dataIndex: 'singer',
@@ -106,68 +70,49 @@ const FormRecordStoreTable: React.FC<Props> = ({ showCheckBox }) => {
             dataIndex: 'artist',
         },
         {
-            title: 'Thể loại',
-            key: 'type',
-            dataIndex: 'type',
+            title: 'Ngày tải',
+            dataIndex: 'downloadDate',
+            key: 'downloadDate',
+            render: (create_at: Timestamp) => (
+                <span>
+                    {formatDate(create_at.toDate())}
+                    {' '}
+                    {create_at.toDate().toLocaleTimeString()}
+                </span>
+            )
         },
         {
-            title: 'Định dạng',
-            key: 'format',
-            dataIndex: 'format',
-        },
-        {
-            title: 'Thời hạn sử dụng',
+            title: 'Tình trạng',
             key: 'status',
-            render: (record: { downloadDate: Timestamp; status: number }) => {
-                const createDate = record.downloadDate ? new Date(record.downloadDate.seconds * 1000) : null;
-                const downloadDateString = createDate ? `${createDate.toLocaleDateString()}` : '';
-
-                let statusText = '';
+            dataIndex: 'status',
+            render: (status: number) => {
+                let text = '';
                 let color = '';
-                switch (record.status) {
+                switch (status) {
                     case 1:
-                        statusText = 'Mới';
+                        text = 'Mới';
                         color = 'green';
                         break;
                     case 2:
-                        statusText = 'Còn thời hạn';
+                        text = 'Đã phê duyệt';
                         color = 'blue';
                         break;
                     case 3:
-                        statusText = 'Đã hết hạn';
-                        color = 'gray';
+                        text = 'Từ chối';
+                        color = 'red';
                         break;
                     default:
-                        statusText = 'Không xác định';
-                        color = 'black';
+                        text = 'Không xác định';
+                        color = 'gray';
                         break;
                 }
-
                 return (
                     <>
-                        <div style={{width: '120px'}}>
-                            <div className='status-dot' style={{ backgroundColor: color }}></div>
-                                {statusText}
-                            <div>
-                                {downloadDateString && `${downloadDateString}`}
-                            </div>
-                        </div>
+                        <div className='status-dot' style={{ border: `1px solid ${color}`, backgroundColor: color }}></div>
+                        {text}
                     </>
                 );
             }
-        },
-        {
-            title: '',
-            dataIndex: 'action',
-            key: 'action',
-            render: (text: string, record: any) => (
-                <Link
-                    to={`/edit-record/${record.id}`}
-                    style={{ color: 'orange' }}
-                >
-                    Cập nhật
-                </Link>
-            ),
         },
         {
             title: '',
@@ -189,23 +134,37 @@ const FormRecordStoreTable: React.FC<Props> = ({ showCheckBox }) => {
         setPageSize(pageSize);
     };
 
-    const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-device-width: 1224px)'
-    });
-
     return (
         <div>
             {isDesktopOrLaptop ? (
-                <div className='form-content'>
+                <div className='form-content' style={{ width: '1683px'}}>
+                    <div className='form-filter'>
+                        <div className='select-container'>
+                            <div style={{ marginRight: '10px' }}>Tình trạng phê duyệt:</div>
+                            <Select className='form-dropdown' placeholder="Tất cả" suffixIcon={<DownOutlined style={{ color: 'orange' }} />}>
+                                <Option key='1' value='1' className='form-option'>Mới</Option>
+                                <Option key='2' value='2' className='form-option'>Đã phê duyệt</Option>
+                                <Option key='3' value='3' className='form-option'>Từ chối</Option>
+                            </Select>
+                        </div>
+
+                        <div className='select-container' style={{marginLeft: 'auto'}}>
+                            <Input
+                                className='form-search'
+                                placeholder="Tên bản ghi, tên ca sĩ, tác giả..."
+                                suffix={<SearchOutlined style={{ color: 'white' }} />}
+                            />
+                        </div>
+                    </div>
+
                     <div className='form-table' style={{ width: '1683px'}}>
                         <div className='table-content'>
                             <Table 
                                 rowKey="index"
                                 columns={columns} 
                                 pagination={false}
-                                style={{ zIndex: 100 }}
                                 className="custom-table"
-                                dataSource={dataSourceWithRowNumber}
+                                dataSource={dataSourceWithRowNumber} 
                             />
                         </div>
                         <div className='custom-show-page' style={{ width: '1650px'}}>
@@ -244,4 +203,4 @@ const FormRecordStoreTable: React.FC<Props> = ({ showCheckBox }) => {
     )
 }
 
-export default FormRecordStoreTable
+export default FormAuthorizedWork
