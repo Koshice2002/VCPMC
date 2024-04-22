@@ -22,16 +22,21 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         const path = location.pathname;
 
         if (    path === '/device-add'
+            ||  path === '/role-add' 
             ||  path === '/add-playlist'
             ||  path === '/broadcast-add' 
+            ||  path.startsWith('/role-edit')
             ||  path === '/add-exploit-contract' 
             ||  path.startsWith('/edit-record/') 
             ||  path === '/new-playlist-add-song'
+            ||  path === '/revenue-report-detail'
             ||  path.startsWith('/partner-add/')
             ||  path.startsWith('/partner-edit/')
+            ||  path === '/user-authorization-add'
             ||  path.startsWith('/device-detail/')
             ||  path.startsWith('/edit-playlist/')
             ||  path === '/add-authorized-contract'
+            ||  path.startsWith('/revenue-detail/') 
             ||  path.startsWith('/partner-detail/')
             ||  path.startsWith('/detail-playlist/')
             ||  path === '/broadcast-add-new-device' 
@@ -40,8 +45,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             ||  path.startsWith('/playlist-add-song/')
             ||  path.startsWith('/broadcast-edit-device/')
             ||  path.startsWith('/edit-exploit-contract/') 
+            ||  path.startsWith('/report-revenue-detail/')
             ||  path.startsWith('/copy-exploit-contract/') 
             ||  path.startsWith('/info-exploit-contract/') 
+            ||  path.startsWith('/user-authorization-edit')
             ||  path.startsWith('/edit-partner-authorized/')
             ||  path.startsWith('/broadcast-edit-playlist/')
             ||  path.startsWith('/edit-authorized-contract/') 

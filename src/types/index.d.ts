@@ -18,8 +18,8 @@ export interface IAuthorizedContract {
   number?: string
   person?: string
   validity?: number
-  create_at?: string
   ownership?: string
+  create_at?: Timestamp
 }
 
 export interface IExploitContract {
@@ -27,9 +27,9 @@ export interface IExploitContract {
   name?: string
   number?: string
   validity?: number
-  create_at?: string
-  effect_at?: string
-  expire_at?: string
+  create_at?: Timestamp
+  effect_at?: Timestamp
+  expire_at?: Timestamp
 }
 
 export interface IAuthorizedSong {
@@ -95,4 +95,28 @@ export interface IUnitUsed {
   phone?: string
   status?: string
   expire_at: Timestamp
+}
+
+export interface IUser {
+  id?: string
+  name?: string
+  email?: string
+  username?: string
+  role?: string
+  phone?: string
+  status?: boolean
+  expire_at: Timestamp
+}
+
+export interface IRole {
+  id?: string
+  name?: string
+  role?: string
+  number?: string
+}
+
+export interface ICategory {
+  id?: string
+  name?: string
+  describe?: string
 }

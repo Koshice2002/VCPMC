@@ -2,10 +2,10 @@ import '../../../styles/styles.css'
 import { Link } from 'react-router-dom';
 import { Table, Pagination } from 'antd';
 import { IBroadcast } from '../../../types';
+import DeletePopUp from '../popup/DeletePopUp';
 import { useMediaQuery } from 'react-responsive';
 import React, { useEffect, useState } from 'react';
 import { getIBroadcast } from '../../../redux/actions/broadcastAction';
-import DeletePopUp from '../popup/DeletePopUp';
 
 const FormBroadcastTable: React.FC = () => {
     const [pageSize, setPageSize] = useState(10);

@@ -7,7 +7,6 @@ import { IAuthorizedContract } from '../../../../types';
 import { Input, Table, Select, Pagination } from 'antd';
 import { SearchOutlined, DownOutlined } from '@ant-design/icons';
 import { getIAuthorizedSongs } from '../../../../redux/actions/songAction';
-import { create } from 'domain';
 
 const { Option } = Select;
 

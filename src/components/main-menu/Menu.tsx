@@ -16,27 +16,7 @@ const Menu: React.FC = () => {
 
     useEffect(() => {
         const path = location.pathname;
-
-        if (    path === '/device-add' 
-            ||  path === '/device-manage' 
-            ||  path === '/contract-manage' 
-            ||  path === '/unit-used-manage' 
-            ||  path === '/add-exploit-contract' 
-            ||  path.startsWith('/partner-add/')
-            ||  path.startsWith('/partner-edit/')
-            ||  path.startsWith('/device-detail/')
-            ||  path === '/add-authorized-contract' 
-            ||  path.startsWith('/partner-detail/')
-            ||  path === '/partner-authorized-manage' 
-            ||  path.startsWith('/unit-used-detail/') 
-            ||  path.startsWith('/info-exploit-contract/') 
-            ||  path.startsWith('/edit-exploit-contract/') 
-            ||  path.startsWith('/copy-exploit-contract/') 
-            ||  path.startsWith('/edit-partner-authorized/')
-            ||  path.startsWith('/edit-authorized-contract/') 
-            ||  path.startsWith('/info-authorized-contract/')
-        ) { setPage('Manage'); }
-        else 
+ 
         if (    path === '/record-store' 
             ||  path.startsWith('/edit-record/')
 
@@ -59,6 +39,50 @@ const Menu: React.FC = () => {
             ||  path.startsWith('/broadcast-edit-device/')
 
         ) { setPage ('Broadcast')}
+        else
+        if (    path === '/device-add' 
+            ||  path === '/device-manage' 
+            ||  path === '/contract-manage' 
+            ||  path === '/unit-used-manage' 
+            ||  path === '/add-exploit-contract' 
+            ||  path.startsWith('/partner-add/')
+            ||  path.startsWith('/partner-edit/')
+            ||  path.startsWith('/device-detail/')
+            ||  path === '/add-authorized-contract' 
+            ||  path.startsWith('/partner-detail/')
+            ||  path === '/partner-authorized-manage' 
+            ||  path.startsWith('/unit-used-detail/') 
+            ||  path.startsWith('/info-exploit-contract/') 
+            ||  path.startsWith('/edit-exploit-contract/') 
+            ||  path.startsWith('/copy-exploit-contract/') 
+            ||  path.startsWith('/edit-partner-authorized/')
+            ||  path.startsWith('/edit-authorized-contract/') 
+            ||  path.startsWith('/info-authorized-contract/')
+        ) { setPage('Manage'); }
+        else
+        if (    path === '/revenue-manage' 
+            ||  path === '/revenue-report'
+            ||  path === '/revenue-history'
+            ||  path === '/revenue-report-detail'
+            ||  path.startsWith('/revenue-detail/')
+            ||  path.startsWith('/report-revenue-detail/')
+        ) { setPage('Revenue')}
+        else 
+        if (    path === '/user-authorization-add'
+            ||  path === '/config'
+            ||  path === '/role-add'
+            ||  path === '/info-work'
+            ||  path === '/system-setting'
+            ||  path === '/manage-contract'
+            ||  path.startsWith('/role-edit')
+            ||  path === '/user-authorization-manage'
+            ||  path.startsWith('/user-authorization-edit')
+        ) { setPage('Setting')}
+        else 
+        if (    path === '/download-app'
+            ||  path === '/feedback'
+            ||  path === '/instruction'
+        ){  setPage('Support')}
     }, [location]);
 
     const isDesktopOrLaptop = useMediaQuery({
@@ -128,20 +152,20 @@ const Menu: React.FC = () => {
                         onMouseEnter={() => setShowSubItem2(true)} 
                         onMouseLeave={() => setShowSubItem2(false)}
                     >
-                        <div className='item' style={{marginLeft: '25px'}}>
+                        <div className={page === 'Revenue' ? 'item item-active' : 'item'} style={{marginLeft: '25px', borderLeft: page === 'Revenue' ? '1px solid #ff7506' : 'none'}}>
                             <i className='icon-item'>
                                 <MoneyCollectOutlined />
                             </i>
                             <span>Doanh thu</span>
                         </div>
-                        <i className='icon-more'>
+                        <i className= {page === 'Revenue' ? 'icon-more item-active' : 'icon-more'}>
                             <MoreOutlined></MoreOutlined>
                         </i>
                         {showSubItem2 && (
                             <div className='sub-item'>
-                                <div className='popup-item'>Báo cáo doanh thu</div>
-                                <div className='popup-item'>Lịch sử đối soát</div>
-                                <div className='popup-item'>Phân phối doanh thu</div>
+                                <Link to={'/revenue-report'} className='popup-item custom-link'>Báo cáo doanh thu</Link>
+                                <Link to={'/revenue-history'} className='popup-item custom-link'>Lịch sử đối soát</Link>
+                                <Link to={'/revenue-manage'} className='popup-item custom-link'>Phân phối doanh thu</Link>
                             </div>
                         )}
                     </div>
@@ -151,22 +175,22 @@ const Menu: React.FC = () => {
                         onMouseEnter={() => setShowSubItem3(true)} 
                         onMouseLeave={() => setShowSubItem3(false)}
                     >
-                        <div className='item' style={{marginLeft: '25px'}}>
+                        <div className={page === 'Setting' ? 'item item-active' : 'item'} style={{marginLeft: '25px', borderLeft: page === 'Setting' ? '1px solid #ff7506' : 'none'}}>
                             <i className='icon-item'>
                                 <SettingOutlined />
                             </i>
                             <span>Cài đặt</span>
                         </div>
-                        <i className='icon-more'>
+                        <i className= {page === 'Setting' ? 'icon-more item-active' : 'icon-more'}>
                             <MoreOutlined></MoreOutlined>
                         </i>
                         {showSubItem3 && (
                             <div className='sub-item'>
-                                <div className='popup-item'>Phân quyền người dùng</div>
-                                <div className='popup-item'>Cấu hình</div>
-                                <div className='popup-item'>Quản lý hợp đồng</div>
-                                <div className='popup-item'>Thông tin tác phẩm</div>
-                                <div className='popup-item'>Chu kỳ đối soát</div>
+                                <Link to={'/user-authorization-manage'} className='popup-item custom-link'>Phân quyền người dùng</Link>
+                                <Link to={'/config'} className='popup-item custom-link'>Cấu hình</Link>
+                                <Link to={'/manage-contract'} className='popup-item custom-link'>Quản lý hợp đồng</Link>
+                                <Link to={'/info-work'} className='popup-item custom-link'>Thông tin tác phẩm</Link>
+                                <Link to={'/system-setting'} className='popup-item custom-link'>Chu kỳ đối soát</Link>
                             </div>
                         )}
                     </div>
@@ -176,20 +200,20 @@ const Menu: React.FC = () => {
                         onMouseEnter={() => setShowSubItem4(true)} 
                         onMouseLeave={() => setShowSubItem4(false)}
                     >
-                        <div className='item' style={{marginLeft: '25px'}}>
+                        <div className={page === 'Support' ? 'item item-active' : 'item'} style={{marginLeft: '25px', borderLeft: page === 'Support' ? '1px solid #ff7506' : 'none'}}>
                             <i className='icon-item'>
                                 <QuestionCircleOutlined />
                             </i>
                             <span>Hỗ trợ</span>
                         </div>
-                        <i className='icon-more'>
+                        <i className= {page === 'Support' ? 'icon-more item-active' : 'icon-more'}>
                             <MoreOutlined></MoreOutlined>
                         </i>
                         {showSubItem4 && (
                             <div className='sub-item'>
-                                <div className='popup-item'>Hướng dẫn sử dụng</div>
-                                <div className='popup-item'>Tải app</div>
-                                <div className='popup-item'>Feedback</div>
+                                <Link to={'/instruction'} className='popup-item custom-link'>Hướng dẫn sử dụng</Link>
+                                <Link to={'/download-app'} className='popup-item custom-link'>Tải app</Link>
+                                <Link to={'/feedback'} className='popup-item custom-link'>Feedback</Link>
                             </div>
                         )}
                     </div>

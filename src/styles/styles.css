@@ -871,3 +871,97 @@
   width: 340px;
   height: 160px;
 }
+
+.report-total {
+  display: flex;
+  height: 96px;
+  width: 1683px;
+  margin-top: 24px;
+  border-radius: 16px;
+  background-color: #2f2f41;
+  border: 1px solid transparent;
+}
+
+.report-total-item {
+  height: 100%;
+  width: 336.6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chart-report {
+  display: flex;
+  width: 1640px;
+  height: 500px;
+  padding: 20px;
+  margin: 0 auto;
+  overflow-y: auto;
+  max-height: 100%;
+  flex-direction: column;
+}
+
+.img-container {
+  width: 240px;
+  display: flex;
+  height: 160px;
+  margin: 0 25px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.small-card-container {
+  width: 350px;
+  height: 350px;
+  border-radius: 16px;
+  background-color: #2f2f41;
+  border: 1px solid transparent;
+}
+
+.small-card-content {
+  display: flex;
+  margin-top: 60px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-icon {
+  width: 226px;
+  height: 176px;
+  margin-bottom: 40px;
+}
+
+.form-feedback {
+  width: 764px;
+  height: 680px;
+  margin-bottom: 30px;
+  border-radius: 16px;
+  background-color: #2f2f41;
+  border: 1px solid transparent;
+}
+
+.feedback-content {
+  display: flex;
+  margin: 40px 32px;
+  flex-direction: column;
+}
+
+.guide-list {
+  width: 400px;
+  height: 750px;
+  margin-right: 40px;
+  border-radius: 16px;
+  background-color: #2f2f41;
+  border: 1px solid transparent;
+}
+
+.instruction-content {
+  width: 1200px;
+  height: 750px;
+  border-radius: 16px;
+  background-color: #2f2f41;
+  border: 1px solid transparent;
+}
